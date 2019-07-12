@@ -1,0 +1,9 @@
+TabLayout的简单使用：
+当选项卡过少时候设置填充全屏
+ app:tabGravity="fill"
+ 设置下面切换选项卡的小滑片颜色
+ app:tabIndicatorColor="#8B1C21"
+ 设置下面切换选项卡的小滑片高度
+ app:tabIndicatorHeight="1dp"
+ app:tabMaxWidth="0dp"
+ app:tabSelectedTextColor="#8B1C21"
