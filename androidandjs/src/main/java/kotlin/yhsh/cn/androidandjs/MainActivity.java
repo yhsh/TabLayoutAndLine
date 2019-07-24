@@ -3,9 +3,12 @@ package kotlin.yhsh.cn.androidandjs;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -16,6 +19,8 @@ public class MainActivity extends Activity {
 
     private TextView tvShowData;
     private WebView wvLoadHtml;
+    private EditText etInputToJs;
+    private Button btClickInputToJs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         tvShowData = findViewById(R.id.tv_show_data);
         wvLoadHtml = findViewById(R.id.wv_load_html);
+        etInputToJs = findViewById(R.id.et_input_to_js);
+        btClickInputToJs = findViewById(R.id.bt_click_input_to_js);
+        btClickInputToJs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inputToJs = etInputToJs.getText().toString().trim();
+                //if(window.writeInputText)判断Js里面的writeInputText是否存在，存在就传递inputToJs这个值到Js里面
+                wvLoadHtml.loadUrl("javascript:if(window.writeInputText){window.writeInputText('" + inputToJs + "')}");
+            }
+        });
         WebSettings settings = wvLoadHtml.getSettings();
         settings.setJavaScriptEnabled(true);
         //方法一：androidJs这个方法必须和Js里面的方法保持一致

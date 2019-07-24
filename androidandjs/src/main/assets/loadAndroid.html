@@ -5,7 +5,7 @@
     <title>Js与Android交互</title>
 </head>
 <body>
-<H2>点击获取按钮,显示输入框内容</H2>
+<H2>点击获取按钮,弹出输入框内容</H2>
 
 
 <div><span>输入数据：</span><input type="text" id="input"/></div>
@@ -15,6 +15,7 @@
 <script type="text/javascript">
     var inputData = document.getElementById("input")
     var btn = document.getElementById("btn")
+    //Js调用Android方法
     btn.addEventListener("click", function () {
         var getInputData = inputData.value;
         //androidJs这个方法必须和Android里面的方法保持一致
@@ -25,6 +26,13 @@
             alert("与android互调方法不存在！")
         }
     });
+
+    //Android调用Js的方法,writeInputText此方法需要跟android里面的方法保持一致
+    var writeInputText = function (str) {
+        inputData.value = str;
+    }
+
+
 
 </script>
 </body>

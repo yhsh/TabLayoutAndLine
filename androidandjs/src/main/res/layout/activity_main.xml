@@ -14,9 +14,24 @@
             android:layout_height="0dp"/>
 
     <TextView
+            android:text="Js调用Android后显示的数据"
             android:gravity="center"
             android:id="@+id/tv_show_data"
             android:layout_width="match_parent"
             android:layout_height="100dp"/>
+    <View
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+    <EditText
+            android:layout_marginTop="10dp"
+            android:id="@+id/et_input_to_js"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <Button
+            android:text="android调用Js代码"
+            android:id="@+id/bt_click_input_to_js"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 </LinearLayout>
