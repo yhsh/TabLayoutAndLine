@@ -7,6 +7,10 @@ import android.view.View;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author DELL
@@ -22,7 +26,17 @@ public class MainActivity extends Activity {
     }
 
     public void getMethod(View view) {
-        new Thread(new Runnable() {
+        int corePoolSize = Runtime.getRuntime().availableProcessors() * 2 + 1;
+        int maxNumPoolSize = corePoolSize + 1;
+        long keepAliveTime = 1;
+        TimeUnit unit = TimeUnit.HOURS;
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(corePoolSize,
+                maxNumPoolSize,
+                keepAliveTime,
+                unit, new LinkedBlockingQueue<Runnable>(),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.AbortPolicy());
+        threadPoolExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 Request request = new Request.Builder()
@@ -35,8 +49,9 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
     }
+
 
     public void postMethodFrom(View view) {
 
